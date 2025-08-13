@@ -1,13 +1,20 @@
 //pega a referência da tela e de todos os botões
 const display = document.getElementById('display');
+const historyDisplay = document.getElementById('history');
 const buttons = document.querySelectorAll('.btn');
 
 //guarda a expressão atual (o que o usuário digitou)
 let expression = '';
+let lastCalculation = '';
 
 //função que atualiza a tela
 function updateDisplay(text) {
     display.innerText = text || '0';
+}
+
+//função que atualiza o histórico
+function updateHistory(text) {
+    historyDisplay.innerText = text || '';
 }
 
 //função para validar expressão(só números, operadores e parenteses)
@@ -25,6 +32,7 @@ buttons.forEach(btn => {
             case 'clear':
                 expression = '';
                 updateDisplay('');
+                updateDisplay('');
                 break;
 
             case 'delete':
@@ -38,6 +46,8 @@ buttons.forEach(btn => {
                         throw new Error('Expressão Inválida');
                     }
                     const result = eval(expression); //cuidado com eval
+                    lastCalculation = `${expression} = ${result}`;
+                    updateHistory(lastCalculation);
                     expression = String(result);
                     updateDisplay(expression);
                 } catch {

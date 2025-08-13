@@ -85,3 +85,11 @@ body {
 [data-action="delete"]:hover {
     background-color: #ffd633;
 }
+
+.history {
+    font-size: 0.9rem;
+    color: #aaa;
+    text-align: right;
+    min-height: 20px;
+    margin-bottom: 5px;
+}
